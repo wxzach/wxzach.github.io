@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      自定义UITextView | zach 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zach">
+    
+    
+
+    <meta name="description" content="自定义textView，实现placeholder，并且可设定限制输入字符数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义UITextView | zach">
+<meta property="og:url" content="http://wxzach.github.io/2016/07/08/自定义UITextView/index.html">
+<meta property="og:site_name" content="zach">
+<meta property="og:description" content="自定义textView，实现placeholder，并且可设定限制输入字符数">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-08-02T13:36:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义UITextView | zach">
+<meta name="twitter:description" content="自定义textView，实现placeholder，并且可设定限制输入字符数">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+        <a href="/" title="link to homepage for zach"><img src="/images/logo.png" width="80" alt="zach logo" class="panel-cover__logo logo" /></a>
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">zach</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          不去尝试你熟练以外的事，你不会得到成长。
+        </p>
+        </br>
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">iOS</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/zach" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">自定义UITextView</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-07-08" class="post-meta__date date">2016-07-08</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="自定义控件的头文件"><a href="#自定义控件的头文件" class="headerlink" title="自定义控件的头文件"></a>自定义控件的头文件</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface WxCustomTextView : UITextView &lt;UITextViewDelegate&gt;</span><br><span class="line"></span><br><span class="line">//设置默认提示</span><br><span class="line">@property(nonatomic,strong) NSString *placeholder;</span><br><span class="line"></span><br><span class="line">//设置限制输入的字数，若未设置则不限制</span><br><span class="line">@property(nonatomic,assign) int limitWordsCount;</span><br><span class="line"></span><br><span class="line">@property(nonatomic,strong) UILabel *placeholderLabel;</span><br><span class="line"></span><br><span class="line">@property(nonatomic,strong) UILabel *wordsCountLabel;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h2 id="自定义控件的-m文件"><a href="#自定义控件的-m文件" class="headerlink" title="自定义控件的.m文件"></a>自定义控件的.m文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;WxCustomTextView.h&quot;</span><br><span class="line"></span><br><span class="line">@interface WxCustomTextView () &#123;</span><br><span class="line">    NSArray *wordsCountLabelConstraintsX;</span><br><span class="line">    NSArray *wordsCountLabelConstraintsY;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation WxCustomTextView</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame &#123;</span><br><span class="line">    if (self = [super initWithFrame:frame]) &#123;</span><br><span class="line">        </span><br><span class="line">        self.delegate = self;</span><br><span class="line">        self.font = [UIFont systemFontOfSize:18];</span><br><span class="line">        //取消连续布局属性，禁止自动重置滑动</span><br><span class="line">        self.layoutManager.allowsNonContiguousLayout = NO;</span><br><span class="line">        </span><br><span class="line">        UILabel *placeholderLabel = [[UILabel alloc] init];</span><br><span class="line">        [placeholderLabel setTranslatesAutoresizingMaskIntoConstraints:NO];</span><br><span class="line">        placeholderLabel.textColor = [UIColor lightGrayColor];</span><br><span class="line">        placeholderLabel.numberOfLines = 0;</span><br><span class="line">        [self addSubview:placeholderLabel];</span><br><span class="line">        _placeholderLabel = placeholderLabel;</span><br><span class="line">        </span><br><span class="line">        NSDictionary *labelVflDict = NSDictionaryOfVariableBindings(placeholderLabel);</span><br><span class="line">        NSString *labelVfl1 = @&quot;|-5-[placeholderLabel]&quot;;</span><br><span class="line">        NSString *labelVfl2 = @&quot;V:|-8-[placeholderLabel]&quot;;</span><br><span class="line">        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:labelVfl1 options:0 metrics:nil views:labelVflDict]];</span><br><span class="line">        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:labelVfl2 options:0 metrics:nil views:labelVflDict]];</span><br><span class="line">        </span><br><span class="line">        UILabel *wordsCountLabel = [[UILabel alloc] init];</span><br><span class="line">        [wordsCountLabel setTranslatesAutoresizingMaskIntoConstraints:NO];</span><br><span class="line">        wordsCountLabel.font = [UIFont systemFontOfSize:12];</span><br><span class="line">        wordsCountLabel.textColor = [UIColor lightGrayColor];</span><br><span class="line">        wordsCountLabel.textAlignment = NSTextAlignmentRight;</span><br><span class="line">        [self addSubview:wordsCountLabel];</span><br><span class="line">        _wordsCountLabel = wordsCountLabel;</span><br><span class="line">        </span><br><span class="line">        NSDictionary *wordsCountLabelVflDict = NSDictionaryOfVariableBindings(wordsCountLabel);</span><br><span class="line">        NSString *wordsCountLabelVfl1 = @&quot;|-100-[wordsCountLabel(40)]&quot;;</span><br><span class="line">        NSString *wordsCountLabelVfl2 = @&quot;V:|-0-[wordsCountLabel(20)]&quot;;</span><br><span class="line">        wordsCountLabelConstraintsX = [NSLayoutConstraint constraintsWithVisualFormat:wordsCountLabelVfl1 options:0 metrics:nil views:wordsCountLabelVflDict];</span><br><span class="line">        [self addConstraints:wordsCountLabelConstraintsX];</span><br><span class="line">        wordsCountLabelConstraintsY = [NSLayoutConstraint constraintsWithVisualFormat:wordsCountLabelVfl2 options:0 metrics:nil views:wordsCountLabelVflDict];</span><br><span class="line">        [self addConstraints:wordsCountLabelConstraintsY];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setPlaceholder:(NSString *)placeholder &#123;</span><br><span class="line">    _placeholder = placeholder;</span><br><span class="line">    _placeholderLabel.text = placeholder;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setPlaceholderLabel:(UILabel *)placeholderLabel &#123;</span><br><span class="line">    _placeholderLabel = placeholderLabel;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setWordsCountLabel:(UILabel *)wordsCountLabel &#123;</span><br><span class="line">    _wordsCountLabel = wordsCountLabel;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setLimitWordsCount:(int)limitWordsCount &#123;</span><br><span class="line">    _limitWordsCount = limitWordsCount;</span><br><span class="line">    if (_limitWordsCount &gt; 0) &#123;</span><br><span class="line">        _wordsCountLabel.text = [NSString stringWithFormat:@&quot;0/%d&quot;,limitWordsCount];</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        _wordsCountLabel.hidden = YES;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setFont:(UIFont *)font &#123;</span><br><span class="line">    //修改UITextView的参数时，要调用super方法</span><br><span class="line">    [super setFont:font];</span><br><span class="line">    _placeholderLabel.font = font;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)layoutSubviews &#123;</span><br><span class="line">    [super layoutSubviews];</span><br><span class="line">    </span><br><span class="line">    //设置子控件</span><br><span class="line">    [self updateCountLabelConstraints];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)updateCountLabelConstraints &#123;</span><br><span class="line">    [self removeConstraints:wordsCountLabelConstraintsX];</span><br><span class="line">    [self removeConstraints:wordsCountLabelConstraintsY];</span><br><span class="line">    NSDictionary *wordsCountLabelVflDict = NSDictionaryOfVariableBindings(_wordsCountLabel);</span><br><span class="line">    NSDictionary *wordsCountLabelMetrics = @&#123;@&quot;width&quot;:@(self.frame.size.width-85),@&quot;height&quot;:@(self.frame.size.height-20 + self.contentOffset.y)&#125;;</span><br><span class="line">    NSString *wordsCountLabelVfl1 = @&quot;|-(width)-[_wordsCountLabel(80)]&quot;;</span><br><span class="line">    NSString *wordsCountLabelVfl2 = @&quot;V:|-(height)-[_wordsCountLabel(20)]&quot;;</span><br><span class="line">    wordsCountLabelConstraintsX = [NSLayoutConstraint constraintsWithVisualFormat:wordsCountLabelVfl1 options:0 metrics:wordsCountLabelMetrics views:wordsCountLabelVflDict];</span><br><span class="line">    [self addConstraints:wordsCountLabelConstraintsX];</span><br><span class="line">    wordsCountLabelConstraintsY = [NSLayoutConstraint constraintsWithVisualFormat:wordsCountLabelVfl2 options:0 metrics:wordsCountLabelMetrics views:wordsCountLabelVflDict];</span><br><span class="line">    [self addConstraints:wordsCountLabelConstraintsY];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)textViewDidChange:(UITextView *)textView &#123;</span><br><span class="line">    if (self.text.length == 0) &#123;</span><br><span class="line">        _placeholderLabel.hidden = NO;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        _placeholderLabel.hidden = YES;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (_limitWordsCount &gt; 0) &#123;</span><br><span class="line">        NSString *toString = textView.text;</span><br><span class="line">        //键盘输入模式</span><br><span class="line">        NSString *language = [[textView textInputMode] primaryLanguage];</span><br><span class="line">        if ([language isEqualToString:@&quot;zh-Hans&quot;]) &#123;</span><br><span class="line">            UITextRange *selectedRange = [textView markedTextRange];</span><br><span class="line">            //获取高亮部分</span><br><span class="line">            UITextPosition *position = [textView positionFromPosition:selectedRange.start offset:0];</span><br><span class="line">            //计算高亮选择的字，对已经输入的文字进行统计和限制</span><br><span class="line">            if (!position) &#123;</span><br><span class="line">                if (toString.length &gt; _limitWordsCount) &#123;</span><br><span class="line">                    textView.text = [toString substringToIndex:_limitWordsCount];</span><br><span class="line">                &#125;</span><br><span class="line">                _wordsCountLabel.text = [NSString stringWithFormat:@&quot;%lu/%d&quot;, (unsigned long)textView.text.length, _limitWordsCount];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if (toString.length &gt; _limitWordsCount) &#123;</span><br><span class="line">                textView.text = [toString substringToIndex:_limitWordsCount];</span><br><span class="line">            &#125;</span><br><span class="line">            _wordsCountLabel.text = [NSString stringWithFormat:@&quot;%lu/%d&quot;, (unsigned long)textView.text.length, _limitWordsCount];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="源码地址：https-github-com-wangzunxian-source-tree-TextView"><a href="#源码地址：https-github-com-wangzunxian-source-tree-TextView" class="headerlink" title="源码地址：https://github.com/wangzunxian/source/tree/TextView"></a>源码地址：<a href="https://github.com/wangzunxian/source/tree/TextView" target="_blank" rel="noopener">https://github.com/wangzunxian/source/tree/TextView</a></h5>
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/07/08/自定义UITextView/" data-title="自定义UITextView" data-url="http://wxzach.github.io/2016/07/08/自定义UITextView/" id="ds-thread"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"wangzunxian"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; zach</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
